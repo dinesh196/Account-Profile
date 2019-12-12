@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch 
+} from 'react-router-dom'
+import NavigationBar from './component/navigationBar/NavigationBar'
+import AccountProfile from './container/accountprofile'
+const account = {
+  username: 'Crunchy Crunch',
+  dateJoined: '9/1/18',
+  membershipLevel: 'Silver'
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+    <React.Fragment>
+      <NavigationBar username={account.username} />
+      {/* <NavigationBar/> */}
+      <Switch>
+        <Route 
+          exact path="/" 
+          render={() => <div>Home</div>}
+        />
+        <Route 
+          exact path = "/account/profile" 
+          render={() => <AccountProfile account={account} />} 
+        />
+      </Switch>
+    </React.Fragment>
+  </Router>
   );
 }
 
